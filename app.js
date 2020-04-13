@@ -16,7 +16,12 @@ let profileRoutes = require("./routes/profiles"),
     indexRoutes      = require("./routes/index")
 
 // DB connection and setting up stuff
-mongoose.connect("mongodb://localhost/shareD",{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex:true,useFindAndModify: false});
+mongoose.connect("mongodb+srv://shashwatsr2712:sUnY27%4012%23@shared-3og6b.mongodb.net/shareD?retryWrites=true&w=majority",{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true,
+    useFindAndModify: false
+});
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
