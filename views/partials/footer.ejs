@@ -1,0 +1,80 @@
+    <!-- User Search Modal -->
+    <div class="modal fade" id="userSearchModal" tabindex="-1" role="dialog" aria-labelledby="userSearchModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="userSearchModalLabel">Matching your search...</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div id="addressSection" class="col-xs-12 col-md-4">
+                    <h2>Address</h2><br/>
+                    <p>
+                        32  A / E, Gr Flr, Crystal Plaza,<br/>
+                        Link Road, Andheri(W), Mumbai<br/>
+                        Maharashtra, India - 400058<br/>
+                    </p><br/>
+                    <a href="mailto:shashwatsr2712@gmail.com"><em>Drop us an e-mail</em></a>
+                </div>
+                <div id="quickLinksSection" class="col-xs-12 col-md-4">
+                    <h2>Quick Links</h2><br/>
+                    <ul>
+                        <li><a href="/login">Login</a></li><br/>
+                        <li><a href="/register">SignUp</a></li><br/>
+                        <li><a id="showProfileSearch" href="javascript:showSearchForm();">View Profile</a></li><br/>
+                        <div class="profile-search-form" id="profileSearchForm">
+                            <form>
+                                <div class="form-group text-center">
+                                    <input class="form-control" onchange="handleSearchChange(this)" type="text" name="profile" placeholder="Enter username"/>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </form>
+                            <br/>
+                        </div>
+                        <li><a href="https://www.linkedin.com/in/shashwatsr2712/" target="_blank">About</a></li><br/>
+                    </ul>
+                </div>
+                <div id="mapSection" class="col-xs-12 col-md-4">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.6392990484474!2d88.30494921459092!3d22.555180785191745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0279c91a8d2d49%3A0xc6ee508c74cf031d!2sIndian%20Institute%20of%20Engineering%20Science%20And%20Technology%2C%20Shibpur!5e0!3m2!1sen!2sin!4v1586774177941!5m2!1sen!2sin" width="250" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+                    </iframe>
+                </div>
+            </div>
+            <!-- Social Icons -->
+            <div class="row">
+                <div class="col-12">
+                    <div id="socialIcons">
+                        <a href="https://www.facebook.com/shashwat.srivastav.3" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/shashwatsr2712/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/ShashwatSuny" target="_blank"><i class="fab fa-twitter"></i></a>                       
+                        <a href="https://www.linkedin.com/in/shashwatsr2712/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/shashwatsr2712" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom bar -->
+        <hr/>
+        <p id="bottomBar"><em>&copy;&nbsp;copyright</em>&nbsp;&nbsp;&nbsp;<strong>ShareD</strong></p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="/scripts/index.min.js"></script>
+
+    </body>
+</html>

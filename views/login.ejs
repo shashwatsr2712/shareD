@@ -1,0 +1,41 @@
+<% include ./partials/header %>
+
+<div id="bgForm">
+    <div class="container mx-auto">
+        <i id="cameraIcon" class="fas fa-camera"></i>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" name="username" placeholder="Username" required="required"/>    
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password" required="required"/>    
+                <i id="showHidePassword" style="margin-top:10px;margin-left:5px;cursor:pointer;font-size:1.4rem;" class="far fa-eye-slash" title="Show Password"></i>
+            </div>
+            <!-- Forgot Password (currently not implemented) -->
+            <!-- <a id="forgot" href="javascript:handleForgot();">Forgot password (you do remember your email ID, right?)</a><br/><br/>
+            <div class="form-group" id="emailDivForgot" style="display:none;">
+                <input class="form-control" type="text" id="uemail" name="email" placeholder="Email address" onchange="handleChange()"/>
+                <a class="btn btn-lg btn-info" id="forgotButton" href="">Send OTP</a>    
+            </div> -->
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </div>
+            <a style="color:white;" href="/register">Don't have an account? Register now!</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Change title
+    document.title="ShareD | Login";
+
+    // Forgot Password (currently not implemented)
+    // function handleForgot(){
+    //     $("#emailDivForgot").toggle();
+    // }
+    // function handleChange(){
+    //     $("#forgotButton").attr("href","/login/reset?email="+$("#uemail").val());
+    // }
+</script>
+
+<% include ./partials/footer %>

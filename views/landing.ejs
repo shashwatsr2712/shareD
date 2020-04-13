@@ -1,0 +1,141 @@
+<% include ./partials/header %>
+
+<header id="background">
+    <div class="container"  >
+        <h1>Welcome to ShareD!</h1><br/>
+        <h3><i>View posts from all over the world.</i></h3><br/><br/>
+        <p>
+            <a class="btn btn-outline-warning btn-lg" href="/new">Add New Post</a>
+        </p>
+    </div>
+    <!-- Scroll below to Posts -->
+    <i id="toBelow" class="fas fa-chevron-down"></i>
+</header>
+
+<script>
+    $('.posts').infiniteScroll({
+        // options
+        path: '.pagination__next',
+        append: '.post',
+        history: false,
+    });
+    var current=-1;
+</script>
+
+<!-- Alert to show user is not logged-in to like posts -->
+<div class="container" id="likeWarning">
+    <div class="alert alert-warning">Please login to react to a post!</div>
+</div>
+
+<!-- A hidden element just to store logged-in or not info to be used to show above div -->
+<div id="hiddenControlLike" data-control-like="<%= currentUser %>" style="display:none;"></div>
+
+<div class="container" id="postsContainer">
+    <!-- Rank button in options row -->
+    <div id="optionsDiv" class="pt-3 row">
+        <div class="offset-md-2 col-md-8 col-12">
+            <a id="rankButton" class="btn" href="/rank"><b><i>Ranking</i></b></a>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Show all posts -->
+    <div class="posts row text-center" style="display:flex;flex-wrap:wrap;">
+        <% posts.forEach(function(post){
+            let len=post.likes_count,
+                set_class=false,
+                mt=post.mimetype %>
+            <script>current+=1;</script>
+            <div class="mt-5 card post offset-md-2 col-md-8 col-12">
+                <% if(mt.startsWith("image")){ %>
+                    <img style="margin-top:10px;margin-bottom:5px;" src="/uploads/<%= post.originalname %>" alt="post image" class="post-main"/>
+                <% } else if(mt.startsWith("audio")){ %>
+                    <audio controls style="margin-top:10px;margin-bottom:10px;" class="post-main"><source src="/uploads/<%= post.originalname %>"></audio>
+                <% } else if(mt.startsWith("video")||mt=="application/x-mpegURL"){ %>
+                    <video controls style="margin-top:10px;margin-bottom:5px;" class="post-main"><source src="/uploads/<%= post.originalname %>"></video>
+                <% } else { %>
+                    <div class="post-main error-div">
+                        <p class="error-message">Unsupported media type!</p>
+                    </div>
+                <% } %>
+                <h5 class="card-header"><%= post.title %>&nbsp;
+                    <small class="text-muted">
+                        <em>By <a href="/profile/<%= post.author.username %>"><%= post.author.username %></a></em>
+                    </small>
+                </h5>
+                <!-- Check if user has liked this post -->
+                <% if(currentUser){
+                    post.likes.every(function(liked_by,index){
+                        if(liked_by.author.username==currentUser.username){
+                            set_class=true;
+                            return false;
+                        } else{
+                            return true;
+                        }
+                    });
+                } %>
+                <div class="card-body">
+                    <!-- Find date of post from upload name -->
+                    <% let post_date=new Date(parseInt(post.originalname.slice(-13))); %>
+                    <p class="card-text text-muted"><small><%= post_date %></small></p>
+                    <p class="card-text"><%= post.description %></p>
+                    <!-- data-test is used in AJAX -->
+                    <p class="card-text">
+                        <i data-test="<%= post._id %>" class="like-button fa fa-heart"></i>&nbsp;&nbsp;&nbsp;
+                        <span><span class="like-count"><%= len %></span> likes so far</span>
+                    </p>
+                    <% if(set_class==true){ %>
+                        <script>$(".like-button").eq(current).addClass("liked-color");</script>
+                    <% } %>
+                </div>
+            </div><br/>
+        <% }); %>
+    </div>
+</div><br/><br/>
+
+<!-- Go to Top button -->
+<button title="Go to Top" id="toTop" class="btn btn-secondary"><i class="fas fa-arrow-up"></i></button>
+
+<!-- Load scripts associated with posts display -->
+<script src="/scripts/displayposts.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        // BG Animation
+        let counter = 0;
+        function changeBG(){
+            let imgs = [
+                "url(https://cdn5.f-cdn.com/contestentries/1370548/29833877/5b4f15b1ea4aa_thumb900.jpg)",
+                "url(https://i.ytimg.com/vi/2v3YSRqWP0A/maxresdefault.jpg)",
+                "url(https://images.freecreatives.com/wp-content/uploads/2015/10/moon-background_-with-its-reflection.jpg)",
+            ];      
+            $("#background").css("background-image",imgs[counter]);
+            counter=(counter+1)%imgs.length;
+        }
+        setInterval(changeBG, 2500);
+        
+        // Button animation
+        let counter1=0;
+        function changeButtonBG(){
+            let colors=[
+                "#315883",
+                "#6badc5",
+                "#7e9cd0",
+                "#4b80b6"
+            ];
+            $("#rankButton").css("background-color",colors[counter1]);
+            counter1=(counter1+1)%colors.length;
+        }
+        setInterval(changeButtonBG,1000);
+
+        // Move Down to show posts
+        $("#toBelow").click(function(){
+            $('html,body').animate({
+                scrollTop:$("#postsContainer").offset().top
+            }, 800);
+            return false;
+        });
+    });
+</script>
+
+<% include ./partials/footer %>

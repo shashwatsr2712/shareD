@@ -1,0 +1,29 @@
+<% include ./partials/header %>
+
+<div id="bgForm">
+    <div class="container mx-auto">
+        <i id="cameraIcon" class="fas fa-camera"></i>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="form-group">       
+                <input class="form-control" name="title" type="text" placeholder="Title" required="required"/>                
+            </div>
+            <div class="form-group">
+                <label for="myfileNew" style="color:white;">Select a file (Image/Audio/Video):</label>
+                <input id="myFileNew" class="form-control" name="file" type="file" required="required"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="description" type="text" placeholder="Caption"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Post Now</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Change title
+    document.title="ShareD | New Post";
+</script>
+
+<% include ./partials/footer %>

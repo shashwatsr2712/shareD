@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Horizontal Scrolling</title>
+<style type="text/css">
+
+* {
+    margin:0;
+    padding:0;
+}
+body {
+    background: #BBB;
+}
+h2 {text-align:center; padding-bottom:10px}
+
+#wrapper {
+    width:600px;
+    margin: 30px auto;
+    border:1px solid #000;
+    background:#EEF;
+    padding:10px 0 25px 0;
+}
+#outer-wrap {
+    width: 550px; 
+    height: 256px;
+    margin:0 auto;
+    overflow: auto; 
+    background:#BCC5E1;
+    border:1px solid #000; 
+}
+#inner-wrap {
+    float:left;
+    margin-right:-999em;
+    padding-left:20px;
+}
+.floatbox {
+    float:left; /*force into block level for dimensions*/
+    width:200px;
+    height:200px;
+    background:blue;
+    color:#FFF;
+    margin:20px 20px 0 0;
+}
+</style>
+</head>
+<body>
+
+    <div id="outer-wrap">
+        <div id="inner-wrap"> 
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div> 
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>
+            <div class="floatbox"><p>Floated Container</p></div>    
+        </div>
+    </div>
+</body>
+</html>

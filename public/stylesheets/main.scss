@@ -1,0 +1,304 @@
+$family1:"Montserrat", Arial, Helvetica, sans-serif;
+$family2:"Courgette", serif;
+$gray:#a9a9a9;
+$red:#FF0000;
+$gradient-color-1:#315883;
+$gradient-color-2:#6badc5;
+$gradient-color-3:#7e9cd0;
+$gradient-color-4:#4b80b6;
+$footer-bg:#262B32;
+$footer-primary:#87ceeb;
+$footer-secondary:#9b9797;
+$footer-hover:#5858e0;
+
+html,body{
+    font-family:$family1;
+}
+
+// Profile Search Form div
+.profile-search-form{
+    display:none;
+}
+
+// background images on landing page
+#background{
+    position:relative;
+    background-image: url(https://cdn5.f-cdn.com/contestentries/1370548/29833877/5b4f15b1ea4aa_thumb900.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    height:100vh;
+    background-position: center; 
+    transition: background-image 1.5s linear;
+    -webkit-transition: background-image 1s;
+    -moz-transition: background-image 1s;
+    -o-transition: background-image 1s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0,0,0);
+    -webkit-transform:translate3d(0,0,0);
+    .container{
+        position:absolute;
+        top:40%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        font-family:$family2;
+        h1,h2,h3,p{
+            text-align:center;
+            color:#FFFFFF;
+            text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                    0px 8px 13px rgba(0,0,0,0.1);
+        }
+        h2,h3{
+            font-family: $family1;
+        }
+    }
+    #toBelow{
+        display:block;
+        text-align:center;
+        height:15vh;
+        cursor: pointer;
+        position:absolute;
+        top:80vh;
+        left:50%;
+        transform:translateX(-50%);
+        border-radius:50%;
+        color:$red;
+        font-size:2.2rem;
+        animation: moveBelow 1s infinite;
+    }
+}
+
+// Animation to move #toBelow button on landing page
+@keyframes moveBelow {
+    0% {top: 75vh;}
+    50% {top: 80vh;}
+    100% {top: 75vh;}
+}
+
+// Like warning
+#likeWarning{
+    display:none;
+    position:fixed;
+    top:0;
+    z-index:1;
+}
+
+// Main navbar
+nav{
+    #navbar-profile-photo{
+        box-sizing:border-box;
+        max-width:80px;
+        height:38px;
+    }
+    .nav-item{
+        margin:auto;
+        font-weight:bold;
+    }
+}
+
+// Options row on landing
+#optionsDiv{
+    #rankButton{
+        color:white;
+        border-radius:25%;
+        transition: background-color 0.5s ease 0s;
+        -moz-transition: background-color 0.5s ease 0s;
+        -webkit-transition: background-color 0.5s ease 0s;
+        -o-transition: background-color 0.5s ease 0s;
+    }
+}
+
+// Posts styling on landing and profile page
+.post{
+    .post-main{
+        max-width:100%;
+        margin-left: auto;
+        margin-right:auto;
+    }
+    .card-text{
+        text-align:left;
+    }
+    .like-button{
+        font-size:2em;
+        cursor:pointer;
+        color:$gray;
+    }
+    .liked-color{
+        color:$red;
+    }
+    .error-div{
+        position:relative;
+        height:200px;
+        .error-message{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }        
+    }
+}
+
+// Button to scroll to top
+#toTop{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    z-index:1;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    display:none;
+}
+#toTop:hover{
+    background-color:$red;
+}
+
+// Footer
+footer{
+    background-color:$footer-bg;
+    color: $footer-secondary;
+    a{
+        color:$footer-primary;
+        text-decoration:none;
+    }
+    a:hover{
+        text-decoration:none;
+        color:$footer-hover;
+    }
+    div.row{
+        color:$footer-secondary;
+        padding-top:40px;
+    }
+    #addressSection>p{
+        color:$footer-primary;
+    }
+    #quickLinksSection{
+        ul{
+            list-style-type:none;
+        }
+    }
+    p#bottomBar{
+        border-top:2px dashed white;
+        padding-top:10px;
+        padding-bottom:10px;
+        text-align:center;
+        margin-bottom:0;
+    }
+    i.fab{
+        font-size:30px;
+        padding-right:15px;
+    }
+    #socialIcons{
+        text-align:center;
+    }
+
+}
+
+// Profile Display page
+#profileShow{
+    #profileDiv{
+        .list-group-item{
+            width:80%;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        // Display picture
+        #profilePhotoDiv{
+            margin-top:40px;
+            margin-bottom:40px;
+            text-align: center;
+            #profilePhoto{
+                border-radius:20%;
+                display:block;
+                height:300px;
+            }
+        }
+    }
+    #loadPostsButton{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+}
+
+// For ranks
+#rankShow{
+    #rankDetails{
+        max-width:50vw;
+    }
+}
+
+// For forms
+#bgForm{
+    // Below 2 lines forms some space between the bg div and the form
+    margin-top:-10vh;
+    padding-top:25vh;
+    min-height:100vh;
+    background-image:linear-gradient(to bottom right,$gradient-color-1,$gradient-color-2,$gradient-color-3,$gradient-color-4);
+    .container{
+        width:40%;
+        min-height:60%;
+        border:2px groove white;
+        form{
+            padding-top: 80px;
+            padding-bottom: 20px;
+            padding-left:1.5rem;
+            padding-right:1.5rem;
+            .form-group{
+                padding-bottom:10px;
+            }
+        }
+    }
+    i#cameraIcon{
+        display:block;
+        height:5rem;
+        width:5rem;
+        transform:translate(1em,1em);
+        color:white;
+        background-color:$red;
+        border-radius:50%;
+        font-size:3rem;
+        position:absolute;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+    i#cameraIcon::before{
+        position: absolute;
+        top:17%;
+        left:21%;
+    }
+}
+
+// For mobile devices
+@media screen and (max-width:767px){
+    footer div.row>div{
+        text-align: center;
+        h2{
+            text-align:center;
+        }
+        ul{
+            padding-left:0;
+        }
+    }
+    footer div.row>div:nth-child(2){
+        padding-top:60px;
+    }
+    #profileDiv{
+        .list-group-item{
+            width:100%;
+        }
+    }
+    #rankShow #rankDetails{
+        max-width:100%;
+    }
+    #bgForm{
+        .container{
+            width:90%;
+            form{
+                padding-left:0.4rem;
+                padding-right: 0.4rem;
+            }
+        }
+    }
+}

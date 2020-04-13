@@ -1,0 +1,28 @@
+<% include ./partials/header %>
+
+<script>
+    // Change title
+    document.title="ShareD | Ranking";
+</script>
+
+<div class="container" id="rankShow">
+    <div id="rankHeading" class="jumbotron" style="color:white;background-image:linear-gradient(to bottom right, #315883, #6badc5, #7e9cd0, #4b80b6);">
+        <h2>Ranking <small><i>See where you stand</i></small></h2>
+    </div>
+    <!-- Div with rank information -->
+    <div id="rankDetails">
+        <ul id="rankDetailsList" class="list-group">
+            <% let rank=1; 
+            ranklist.forEach(function(author){ %>
+                <a href="/profile/<%= author[0] %>" class="list-group-item list-group-item-success" style="text-decoration:none;">
+                    <span style="width:30%;"><%= rank %></span>&nbsp;
+                    <span style="width:70%;word-wrap:break-word;"><%= author[0] %></span>&nbsp; <!-- username -->
+                    <span style="color:red;"><b><%= author[1] %> likes</b></span> <!-- score/likes -->
+                </a><br/>
+                <% rank+=1; 
+            }); %>
+        </ul>
+    </div><br/>
+</div>
+
+<% include ./partials/footer %>

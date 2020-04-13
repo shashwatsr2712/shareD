@@ -1,0 +1,146 @@
+<% include ../partials/header %>
+
+<!-- Alert to show user is not logged-in to like posts -->
+<div class="container" id="likeWarning">
+    <div class="alert alert-warning">Please login to react to a post!</div>
+</div>
+
+<!-- A hidden element just to store logged-in or not info to be used to show above div -->
+<div id="hiddenControlLike" data-control-like="<%= currentUser %>" style="display:none;"></div>
+
+<div class="container" id="profileShow">
+    <!-- Div with profile information -->
+    <div id="profileDiv">
+        <div id="profilePhotoDiv">
+            <img id="profilePhoto" class="mx-auto" src="/uploads/<%= profile.photo.originalname %>" alt="<%= profile.username %>"/>
+            <% if(edit){ %>
+                <br/><a href="/profile/<%= profile.username %>/edit" class="btn btn-outline-secondary">Edit &nbsp;<i class="fas fa-pencil-alt"></i></a>
+            <% } %>
+        </div>
+        <ul id="profileDetails" class="list-group">
+            <li class="list-group-item list-group-item-primary">
+                Username <strong><i><%= profile.username %></i></strong>
+            </li><br/>
+            <li class="list-group-item list-group-item-danger">
+                Name <strong><i><%= profile.name %></i></strong>
+            </li><br/>
+            <li class="list-group-item list-group-item-warning">
+                Bio <strong><i><%= profile.bio %></i></strong>
+            </li><br/>
+            <li class="list-group-item list-group-item-success">
+                Garnered <strong><i><%= likes %></i></strong> &nbsp; <i style="color:red" class="fa fa-heart"></i> likes so far 
+            </li><br/>
+        </ul>
+    </div>
+
+    <hr>
+    
+    <!-- Button to load posts; data-user is username from route (one whose profile is being viewed) -->
+    <% if(currentUser){ %>
+        <!-- Enter username of logged-in user in data-logged -->
+        <button id="loadPostsButton" class="btn btn-warning" data-user="<%= profile.username %>" data-logged="<%= currentUser.username %>">Load Posts</button><br/>
+    <% } else{ %>
+        <!-- In this case, data-logged will be false -->
+        <button id="loadPostsButton" class="btn btn-warning" data-user="<%= profile.username %>" data-logged="<%= currentUser %>">Load Posts</button><br/>
+    <% } %>
+
+    <!-- Posts will be fetched here -->
+    <div class="posts row text-center" style="display:flex;flex-wrap:wrap;">
+    </div>
+</div><br/><br/>
+
+<!-- Go to Top button -->
+<button title="Go to Top" id="toTop" class="btn btn-secondary"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // Change title
+    document.title="ShareD | Profile: "+$("#loadPostsButton").attr("data-user");
+
+    // Load posts on click AJAX
+    $("#loadPostsButton").click(function(){
+        let isloggedin=$(this).attr("data-logged");
+        console.log(isloggedin);
+        let data={};
+        data.username=$(this).attr("data-user");
+        $.ajax({
+            type: 'post',
+            url: '/profile/showposts',
+            data: data,
+            dataType: 'json'
+        })
+        .done(function(recvd_data1){ // Retrieved from DB
+            let el=$(".posts:eq(0)");
+            let html='';
+            if(Array.isArray(recvd_data1)){ // User has >0 posts
+                let current=-1;
+                recvd_data1.forEach(function(post){
+                    let len=post.likes_count,
+                        set_class=false,
+                        mt=post.mimetype;
+                    current+=1;
+                    html='';
+                    html+='<div class="mt-5 card post offset-md-2 col-md-8 col-12">';
+                    if(mt.startsWith("image")){
+                        html+='<img style="margin-top:10px;margin-bottom:5px;" src="/uploads/'+post.originalname+'" alt="post image" class="card-img-top post-main"/>';
+                    } else if(mt.startsWith("audio")){
+                        html+='<audio controls style="margin-top:10px;margin-bottom:10px;" class="post-main"><source src="/uploads/'+post.originalname+'"></audio>';
+                    } else if(mt.startsWith("video")||mt=="application/x-mpegURL"){
+                        html+='<video controls style="margin-top:10px;margin-bottom:5px;" class="post-main"><source src="/uploads/'+post.originalname+'"></video>';
+                    } else {
+                        html+=`<div class="post-main error-div">
+                            <p class="error-message">Unsupported media type!</p>
+                        </div>`;
+                    }
+                    html+=`<h5 class="card-header">${post.title}&nbsp;
+                        <small class="text-muted">
+                            <em>By <a href="/profile/${post.author.username}">${post.author.username}</a></em>
+                        </small>
+                    </h5>`;
+                    // Check if user has liked this post
+                    if(isloggedin){
+                        post.likes.every(function(liked_by,index){
+                            if(liked_by.author.username==isloggedin){
+                                set_class=true;
+                                return false;
+                            } else{
+                                return true;
+                            }
+                        });
+                    }
+                    html+='<div class="card-body">';
+                    // Find date of post
+                    let post_date=new Date(parseInt(post.originalname.slice(-13)));
+                    html+=`<p class="card-text text-muted"><small>${post_date}</small></p>`;
+                    html+=`<p class="card-text">${post.description}</p>`;
+                    // data-test is used in modify likes AJAX
+                    html+=`<p class="card-text">
+                        <i data-test="${post._id}" class="like-button fa fa-heart"></i>&nbsp;&nbsp;&nbsp;
+                        <span><span class="like-count">${len}</span> likes so far</span>
+                    </p>`;
+                    if(isloggedin&&isloggedin==data.username){ // Show delete button
+                        html+=`<form onsubmit="return confirm('Do you really want to delete this post?')" method="post" action="/${post._id}?_method=DELETE&author=${post.author.username}">
+                                <button class="btn btn-block btn-danger" type="submit">Delete</button>
+                            </form>`;
+                    }
+                    if(set_class==true){
+                        html+=`<script>
+                            $(".like-button").eq(${current}).addClass("liked-color");
+                        <\/script>`;
+                    }
+                    html+='</div></div><br/>';
+                    el.append(html);
+                });
+            } else{ // No posts for this user
+                html='<div class="alert alert-info">No posts found!</div>';
+                el.html('');
+                el.append(html);
+            }
+        });
+        $(this).hide();
+    });
+</script>
+
+<!-- Load scripts associated with posts display -->
+<script src="/scripts/displayposts.min.js"></script>
+
+<% include ../partials/footer %>

@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<div id="bgForm">
+    <div class="container mx-auto">
+        <i id="cameraIcon" class="fas fa-camera"></i>
+        <form action="/profile/<%= currentUser.username %>?_method=PUT" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="editProfileEmail" style="color:white;">Email Id</label>
+                <input id="editProfileEmail" class="form-control" type="email" name="profile[email]" value="<%= currentUser.email %>" placeholder="Email" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="editProfileUsername" style="color:white;">Username</label>
+                <input id="editProfileUsername" class="form-control" type="text" name="profile[username]" value="<%= currentUser.username %>" placeholder="username" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="editProfileName" style="color:white;">Name</label>
+                <input id="editProfileName" class="form-control" type="text" name="profile[name]" value="<%= currentUser.name %>" placeholder="Name" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="editProfileBio" style="color:white;">About yourself</label>
+                <input id="editProfileBio" class="form-control" type="text" name="profile[bio]" value="<%= currentUser.bio %>" placeholder="Something about yourself..."/>
+            </div>
+            <div class="form-group">
+                <label for="myFileEdit" style="color:white;">Update your profile photo:</label>
+                <input class="form-control" id="myFileEdit" name="file" type="file"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Changes</button>
+            </div>
+        </form>
+    </div><br/><br/>
+</div>
+
+<script>
+    // Change title
+    document.title="ShareD | Edit your profile"
+</script>
+
+<% include ../partials/footer %>

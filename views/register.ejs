@@ -1,0 +1,39 @@
+<% include ./partials/header %>
+
+<div id="bgForm">
+    <div class="container mx-auto">
+        <i id="cameraIcon" class="fas fa-camera"></i>
+        <form action="/register" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" placeholder="Email" required="required"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="username" placeholder="username" required="required"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Name" required="required"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="bio" placeholder="Something about yourself..." required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="myFile" style="color:white;">Upload a profile photo:</label>
+                <input class="form-control" id="myFile" name="file" type="file"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password" required="required"/>
+                <i id="showHidePassword" style="margin-top:10px;margin-left:5px;cursor:pointer;font-size:1.4rem;" class="far fa-eye-slash" title="Show Password"></i>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
+            </div>
+        </form>
+    </div><br/><br/>
+</div>
+
+<script>
+    // Change title
+    document.title="ShareD | Sign Up";
+</script>
+
+<% include ./partials/footer %>
