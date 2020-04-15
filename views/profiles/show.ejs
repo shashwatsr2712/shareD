@@ -33,7 +33,7 @@
         </ul>
     </div>
 
-    <hr>
+    <hr id="abovePostsHR" style="border-top:1px dotted blue;">
     
     <!-- Button to load posts; data-user is username from route (one whose profile is being viewed) -->
     <% if(currentUser){ %>
@@ -73,6 +73,9 @@
             let html='';
             if(Array.isArray(recvd_data1)){ // User has >0 posts
                 let current=-1;
+                // Display sorting technique
+                html='<small class="mt-2"><b>Sorted by - <i style="color:green">Recent</i></b></small>';
+                $(html).insertAfter("#abovePostsHR");
                 recvd_data1.forEach(function(post){
                     let len=post.likes_count,
                         set_class=false,
@@ -81,7 +84,7 @@
                     html='';
                     html+='<div class="mt-5 card post offset-md-2 col-md-8 col-12">';
                     if(mt.startsWith("image")){
-                        html+='<img style="margin-top:10px;margin-bottom:5px;" src="/uploads/'+post.originalname+'" alt="post image" class="card-img-top post-main"/>';
+                        html+='<img style="margin-top:10px;margin-bottom:5px;" src="/uploads/'+post.originalname+'" alt="post image" class="post-main"/>';
                     } else if(mt.startsWith("audio")){
                         html+='<audio controls style="margin-top:10px;margin-bottom:10px;" class="post-main"><source src="/uploads/'+post.originalname+'"></audio>';
                     } else if(mt.startsWith("video")||mt=="application/x-mpegURL"){

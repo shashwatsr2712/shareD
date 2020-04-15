@@ -78,11 +78,20 @@ router.get("/logout",function(req,res){
 
 // Root route
 router.get("/",function(req,res){
-    Post.find({}).sort({likes_count:-1}).exec(function(err,allPosts){
+    let sort_by={}; // using no parameter will give array in chronological order
+    // we can reverse this to sort by recent
+    let sortby='Recent'; // variable used in frontend 
+    if(Object.keys(req.query).length>0 && req.query.sortby=='Likes'){
+        sort_by={likes_count:1};
+        sortby='Likes';
+    } else{
+        // ignore other queries and sort by 'recent'
+    }
+    Post.find({}).sort(sort_by).exec(function(err,allPosts){
         if(err){
             console.log(err);
         } else{
-            res.render("landing",{posts:allPosts});
+            res.render("landing",{posts:allPosts.reverse(),sortby:sortby});
         }
     });
 });

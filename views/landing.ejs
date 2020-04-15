@@ -35,9 +35,23 @@
     <div id="optionsDiv" class="pt-3 row">
         <div class="offset-md-2 col-md-8 col-12">
             <a id="rankButton" class="btn" href="/rank"><b><i>Ranking</i></b></a>
+            <% let sort_class='btn-outline-danger',next_sort='Likes'; 
+            if(sortby=='Likes'){
+                sort_class='btn-outline-success';
+                next_sort='Recent';
+            } %>
+            <!-- Show sort by likes/recent button -->
+            <span class="ml-4"><i>Sort by - </i><a id="sortButton" class="btn <%= sort_class %>" href="/?sortby=<%= next_sort %>"><%= next_sort %></a></span>
         </div>
     </div>
-    <hr>
+    <hr style="border-top:1px dotted blue;">
+
+    <!-- Show current sorting technique -->
+    <% curr_color='green'; 
+    if(sortby=='Likes'){
+        curr_color='red';
+    } %>
+    <small><b>Currently Sorted by - <i style="color:<%= curr_color %>"><%= sortby %></i></b></small>
 
     <!-- Show all posts -->
     <div class="posts row text-center" style="display:flex;flex-wrap:wrap;">

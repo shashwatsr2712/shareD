@@ -112,6 +112,10 @@ nav .nav-item {
   -o-transition: background-color 0.5s ease 0s;
 }
 
+#optionsDiv #sortButton {
+  border-radius: 25%;
+}
+
 .post .post-main {
   max-width: 100%;
   margin-left: auto;

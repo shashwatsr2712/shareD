@@ -106,6 +106,9 @@ nav{
         -webkit-transition: background-color 0.5s ease 0s;
         -o-transition: background-color 0.5s ease 0s;
     }
+    #sortButton{
+        border-radius:25%;
+    }
 }
 
 // Posts styling on landing and profile page
