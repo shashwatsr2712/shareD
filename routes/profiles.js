@@ -87,8 +87,10 @@ router.post("/showposts",function(req,res){
         } else{
             if(foundPosts.length==0){
                 foundPosts={};
+                res.send(foundPosts);
+            } else{
+                res.send(foundPosts.reverse());
             }
-            res.send(foundPosts.reverse());
         }
     });
 });

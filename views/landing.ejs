@@ -55,7 +55,18 @@
 
     <!-- Show all posts -->
     <div class="posts row text-center" style="display:flex;flex-wrap:wrap;">
-        <% posts.forEach(function(post){
+        <% if(posts.length==0){ %>
+            <div class="offset-md-2 col-md-8 col-12">
+                <!-- https://thumbs.dreamstime.com/b/page-not-found-design-template-error-flat-line-concept-link-to-non-existent-document-no-results-magnifying-glass-156396935.jpg -->
+                <!-- https://cdn.dribbble.com/users/1554526/screenshots/3399669/no_results_found.png -->
+                <!-- https://thumbs.dreamstime.com/b/no-found-symbol-unsuccessful-search-suitable-results-oops-page-failure-concept-flat-outline-vector-illustration-loupe-122872462.jpg -->
+                <!-- https://pixelclerks.com/assets/img/features/noresults.jpg -->
+                <img class="img-fluid" src="https://cdn.dribbble.com/users/1554526/screenshots/3399669/no_results_found.png" alt="Nothing to display"/>
+                <br/>
+                <h4>No posts to display... Start with your own!</h4>
+            </div>
+        <% } else{
+        posts.forEach(function(post){
             let len=post.likes_count,
                 set_class=false,
                 mt=post.mimetype %>
@@ -103,7 +114,8 @@
                     <% } %>
                 </div>
             </div><br/>
-        <% }); %>
+        <% });
+         } %>
     </div>
 </div><br/><br/>
 
