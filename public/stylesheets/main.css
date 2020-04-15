@@ -8,7 +8,7 @@ html, body {
 
 #background {
   position: relative;
-  background-image: url(https://cdn5.f-cdn.com/contestentries/1370548/29833877/5b4f15b1ea4aa_thumb900.jpg);
+  background-image: url(/images/landing_bg_0.jpg);
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
