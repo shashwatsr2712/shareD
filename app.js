@@ -16,7 +16,8 @@ let profileRoutes = require("./routes/profiles"),
     indexRoutes      = require("./routes/index")
 
 // DB connection and setting up stuff
-mongoose.connect("mongodb+srv://shashwatsr2712:sUnY27%4012%23@shared-3og6b.mongodb.net/shareD?retryWrites=true&w=majority",{
+const dbURI=process.env.DATABASEURI || "mongodb://localhost/shareD";
+mongoose.connect(dbURI,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true,
@@ -53,6 +54,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/profile", profileRoutes);
 
-app.listen(3000, function(){
+const port=process.env.PORT || 3000;
+app.listen(port, function(){
    console.log("ShareD Server Has Started!");
 });
