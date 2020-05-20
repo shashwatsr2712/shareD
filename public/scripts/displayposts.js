@@ -1,4 +1,4 @@
-// This scriptis included in landing and show(profile) pages 
+// This script is included in landing and show(profile) pages 
 
 $(document).ready(function(){
     // Handle like/unlike events
