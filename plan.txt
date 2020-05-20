@@ -7,7 +7,7 @@ Description:
 Routes (frontend):
 /-> get; landing page; show all content ranked by likes.
 /-> post(isLoggedIn); action of adding new post
-/:id-> delete secured(ownsThePost); delete the post
+/:id-> delete secured(checkDeletingOwn); delete the post
 /new-> get secured(isLoggedIn); form for posting
 /register-> get and post
 /login-> get and post
@@ -15,8 +15,8 @@ Routes (frontend):
 /login/reset-> get and post; password reset
 /rank-> get secured(isLoggedIn); rank of users
 /profile/:username-> get; show profile of a user
-/profile/:username/edit-> get secured(isLoggedIn&&isEditingOwn); allow to edit
-/profile/:username-> put secured(isLoggedIn&&isEditingOwn);
+/profile/:username/edit-> get secured(isLoggedIn&&checkEditingOwn); allow to edit
+/profile/:username-> put secured(isLoggedIn&&checkEditingOwn);
 
 AJAX:
 /modifylikes-> post (send like/unlike flag and post id)
