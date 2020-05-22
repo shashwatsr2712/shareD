@@ -109,6 +109,22 @@
                         <i data-test="<%= post._id %>" class="like-button fa fa-heart"></i>&nbsp;&nbsp;&nbsp;
                         <span><span class="like-count"><%= len %></span> likes so far</span>
                     </p>
+                    <div class="comment-section">
+                        <form class="form-inline">
+                            <div class="input-group" style="width:100%;">
+                                <!-- data-post-info is used in AJAX -->
+                                <% if(currentUser){ %> 
+                                <input data-post-info="<%= post._id %>" class="form-control" type="text" name="commentdesc" placeholder="Say something..."/>
+                                <% } else{ %>
+                                <input data-post-info="<%= post._id %>" class="form-control" type="text" name="commentdesc" placeholder="Say something..." disabled="disabled"/>
+                                <% } %>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit" disabled="disabled">Post</button>
+                                </span>
+                            </div>
+                        </form><br/>
+                        <button data-post-info-2="<%= post._id %>" class="view-all-comments btn btn-sm btn-outline-info">View all comments</button>
+                    </div>
                     <% if(set_class==true){ %>
                         <script>$(".like-button").eq(current).addClass("liked-color");</script>
                     <% } %>
@@ -118,6 +134,9 @@
          } %>
     </div>
 </div><br/><br/>
+
+<!-- Include comments modal -->
+<% include ./partials/comment_modal %>
 
 <!-- Go to Top button -->
 <button title="Go to Top" id="toTop" class="btn btn-secondary"><i class="fas fa-arrow-up"></i></button>

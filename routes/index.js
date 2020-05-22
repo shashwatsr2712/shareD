@@ -3,6 +3,7 @@ var router=express.Router();
 var passport=require("passport");
 var User=require("../models/user");
 var Post=require("../models/post");
+var Comment=require("../models/comment");
 var multer=require('multer'); 
 var middleware=require('../middleware/index.js')
 
@@ -192,8 +193,57 @@ router.post("/searchusers",function(req,res){
         } else{
             res.send(foundUsers);
         }
-    })
-})
+    });
+});
+
+// AJAX add comment for a post
+router.post("/addcomment",middleware.isLoggedIn,function(req,res){
+    let author={
+        id:req.user._id,
+        username:req.user.username
+    };
+    let post={
+        id:req.body.post_id
+    };
+    let new_comment={description:req.body.description,timestamp:Date.now(),author:author,post:post};
+    Comment.create(new_comment,function(err,newComment){
+        if(err){
+            console.log(err);
+        } else{
+            res.send(newComment);
+        }
+    });
+});
+
+// AJAX to view all comments for a post
+router.post("/viewcomments",function(req,res){
+    let post_id_for_comment=req.body.id;
+    Comment.find({"post.id":post_id_for_comment},function(err,foundComments){
+        if(err){
+            console.log(err);
+        } else{
+            // Create a new array to be returned
+            let foundCommentsMod=[], foundCommentMod={}, counter=0;
+            if(foundComments.length==0){
+                // Return empty array
+                res.send(foundCommentsMod);
+            } else{
+                foundComments.forEach(function(foundComment){
+                    counter+=1;
+                    foundCommentMod={};
+                    foundCommentMod.username=foundComment.author.username;
+                    foundCommentMod.description=foundComment.description;
+                    // Get just the date
+                    foundCommentMod.timestamp=new Date(foundComment.timestamp).toDateString();
+                    foundCommentsMod.push(foundCommentMod);
+                    if(counter==foundComments.length){
+                        return res.send(foundCommentsMod);
+                    }
+                });
+            }
+        }
+    });
+});
 
 // Delete a post (only author has the rights)
 router.delete("/:id",middleware.checkDeletingOwn,function(req,res){
