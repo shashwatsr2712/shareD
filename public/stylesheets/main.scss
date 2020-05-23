@@ -276,6 +276,9 @@ footer{
 
 // For mobile devices
 @media screen and (max-width:767px){
+    #background{
+        background-attachment: scroll;
+    }
     footer div.row>div{
         text-align: center;
         h2{

@@ -287,6 +287,9 @@ footer #socialIcons {
 }
 
 @media screen and (max-width: 767px) {
+  #background {
+    background-attachment: scroll;
+  }
   footer div.row > div {
     text-align: center;
   }
