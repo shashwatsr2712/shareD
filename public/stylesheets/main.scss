@@ -27,7 +27,8 @@ html,body{
     background-size: cover;
     background-attachment: fixed;
     height:100vh;
-    background-position: center; 
+    background-position: center;
+    background-repeat: no-repeat;
     transition: background-image 1.5s linear;
     -webkit-transition: background-image 1s;
     -moz-transition: background-image 1s;
