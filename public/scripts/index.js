@@ -42,6 +42,9 @@ $(document).ready(function(){
     $(".profile-search-form>form").submit(function(event){
         event.preventDefault();
         let check=$(this).parent().attr("id"); // This is to check if top or bottom form is used 
+        let submit_button=$(this).find("button"); // Form submit button
+        submit_button.toggleClass("btn-secondary");
+        submit_button.attr("disabled","disabled");
         data={};
         if(check=="profileSearchForm"){ // Footer form is used
             data.search=inp;
@@ -55,6 +58,8 @@ $(document).ready(function(){
             dataType: 'json'
         })
         .done(function(data_recvd){ // Search done in DB
+            submit_button.toggleClass("btn-secondary");
+            submit_button.removeAttr("disabled");
             let elem1=$("#userSearchModal .modal-body:eq(0)"); // Append results to modal body
             elem1.empty();
             let to_be_appended='<div class="list-group">';
